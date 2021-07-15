@@ -1,4 +1,5 @@
 import {
+  PHX_ACTIVE_ENTRY_REFS,
   PHX_PREFLIGHTED_REFS,
   PHX_UPLOAD_REF
 } from "./constants"
@@ -7,11 +8,24 @@ import LiveUploader from "./live_uploader"
 
 let Hooks = {
   LiveFileUpload: {
+    activeRefs(){ return this.el.getAttribute(PHX_ACTIVE_ENTRY_REFS) },
+
     preflightedRefs(){ return this.el.getAttribute(PHX_PREFLIGHTED_REFS) },
 
-    mounted(){ this.preflightedWas = this.preflightedRefs() },
+    mounted(){
+      this.activeWas = this.activeRefs()
+      this.preflightedWas = this.preflightedRefs()
+    },
 
     updated(){
+      let newActives = this.activeRefs()
+      if(this.activeWas !== newActives){
+        this.activeWas = newActives
+        if(newActives === ""){
+          this.el.value = null
+        }
+      }
+
       let newPreflights = this.preflightedRefs()
       if(this.preflightedWas !== newPreflights){
         this.preflightedWas = newPreflights
