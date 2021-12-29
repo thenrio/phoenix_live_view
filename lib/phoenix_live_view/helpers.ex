@@ -114,6 +114,12 @@ defmodule Phoenix.LiveView.Helpers do
   The expression inside `{...}` must be either a keyword list or a map containing
   the key-value pairs representing the dynamic attributes.
 
+  Note that boolean value is omitted in rendered html, interpolation of `[checked: true, unchecked: false]` is
+
+      <div checked>
+        ...
+      </div>
+
   ### HEEx extension: Defining function components
 
   Function components are stateless components implemented as pure functions

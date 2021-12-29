@@ -128,8 +128,8 @@ defmodule Phoenix.LiveView.HTMLEngineTest do
   end
 
   test "handles dynamic attributes" do
-    assert render("Hello <div {@attrs}>text</div>", %{attrs: [name: "1", phone: to_string(2)]}) ==
-             "Hello <div name=\"1\" phone=\"2\">text</div>"
+    assert render("Hello <div {@attrs}>text</div>", %{attrs: [name: "1", phone: 2, checked: true, unchecked: false]}) ==
+             "Hello <div name=\"1\" phone=\"2\" checked>text</div>"
   end
 
   test "keeps attribute ordering" do
